@@ -69,7 +69,7 @@ if uploaded_file is not None:
     ax3.invert_yaxis()
 
     ax4.barh(fourth_line_station_names, fourth_line['하차총승객수'], height=0.5, color=['#00A5DE'])
-    ax4.set_title("3호선", loc='center', pad=20, fontsize=16, color='#00A5DE')
+    ax4.set_title("4호선", loc='center', pad=20, fontsize=16, color='#00A5DE')
     ax4.set_xlabel("일평균 하차총승객수", labelpad=16)
     ax4.set_ylabel("역명", labelpad=16)
     ax4.tick_params(axis='x', labelsize=8)
