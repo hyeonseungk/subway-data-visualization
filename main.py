@@ -2,8 +2,9 @@ import streamlit as st # streamlit 임포트
 from io import StringIO # StringIO 임포트
 import pandas as pd # pandas 임포트
 import matplotlib.pyplot as plt # matplotlib 임포트
+import matplotlib.font_manager as fm # 코드 추가
 
-uploaded_file = st.file_uploader("지하철 데이터를 업로드하세요.") # 파일 업로드용 인풋
+uploaded_file = st.file_uploader("지하철 데이터를 업로드하세요!!!!~~~") # 파일 업로드용 인풋
 
 if uploaded_file is not None: # BytesIO 객체
     string = uploaded_file.getvalue().decode("utf-8") # BytesIO 객체를 문자열로 변환 
@@ -13,10 +14,16 @@ if uploaded_file is not None: # BytesIO 객체
     df["사용일자"] = pd.to_datetime(df["사용일자"], format="%Y%m%d") # 사용일자 컬럼값들을 datetime 타입으로 변경
     df["등록일자"] = pd.to_datetime(df["등록일자"], format="%Y%m%d") # 등록일자 컬럼값들을 datetime 타입으로 변경
     
-    # st.write(df)
+   # 코드 추가
+    def register_fonts():
+        font_files = fm.findSystemFonts(fontpaths=['./fonts'])
+        for font_file in font_files:
+            fm.fontManager.addfont(font_file)
+        fm._load_fontmanager(try_read_cache=False)
 
-    # 그래프 추가 코드(이전에 배운 내용)
-    plt.rcParams['font.family'] = 'AppleGothic'
+    register_fonts()
+
+    plt.rcParams['font.family'] = 'NanumGothic' # 폰트 설정
 
     first_line = df[df["노선명"]=="1호선"].groupby("역명", as_index=False)["하차총승객수"].mean().sort_values(by="하차총승객수", ascending=False).head(10)
     second_line = df[df["노선명"]=="2호선"].groupby("역명", as_index=False)["하차총승객수"].mean().sort_values(by="하차총승객수", ascending=False).head(10)
